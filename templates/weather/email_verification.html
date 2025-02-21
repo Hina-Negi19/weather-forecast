@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <body style="background-color: #FAF9F6;">
+        <div class="container-fluid mt-5">
+            
+            <h1 style="text-align:center;margin-bottom: 70px;">Email verification</h1>
+            
+            <div class="d-flex justify-content-center align-items-center flex-column">
+                <form class="w-50" style="border:2px solid black;border-radius: 5px;" method="post">
+                    <div class="row p-4 pb-0">
+                        <div class=" col">
+                                <div class="mb-3">
+                                    <label for="verification_code" class="form-lable mb-2"><b>Enter verification code</b></label>
+                                    <input type="text" id="verification_code" class="form-control" name="verification_code" required>
+                                </div>
+                        </div>
+                    </div>
+                   
+                    
+                    <div class="d-grid p-3">
+                        <button class="btn btn-primary" type="submit">Confirm Password</button>
+                      </div>
+                     {%csrf_token%}
+                </form>
+            </div> 
+            
+        </div>
+     
+    </body>
+</body>
+</html>

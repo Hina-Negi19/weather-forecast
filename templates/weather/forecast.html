@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .roboto-slab {
+               font-family: "Roboto Slab", serif;
+              font-optical-sizing: auto;
+               font-weight: 300;
+               font-style: normal;}
+
+        table tr:hover {
+            background-color:#899499;
+            z-index:5;
+        }
+
+        .highlighter{
+             
+            font-size: 25px;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid mb-5">
+        <div class="row " style="background-color: #4e9294;">
+          <div class="col p-0">
+              <nav class="navbar p-0">
+                  <a class="navbar-brand roboto-slab px-5 text-white" style="font-size: 26px;"><b>Weather App</b>
+                  <img src="{%static 'images/logo4.png'%}" alt="" height="80" width="80" class="d-inline-block align-content-center"></a>
+                  <div class="navbar-text d-flex gap-5 font-monospace " style="font-size: 22px;margin-right: 50px;">
+                    <a href="\weather" class="roboto-slab text-white">Weather</a>
+                   <a href="\login" style='text-decoration: none;' class="roboto-slab text-white">login</a>
+                   <a href="\logout" style='text-decoration: none;' class="roboto-slab text-white">logout</a>
+                   <a href="\signup" style='text-decoration: none;' class="roboto-slab text-white">signup</a>
+                  
+                  </div>
+                </nav>
+          </div>
+        </div>
+          </div>
+    <div class="container mt-3">
+        <div class="d-flex flex-row  gap-4 mx-2"> 
+            {% if weather_data.flag %}
+            <img src="{{weather_data.flag}}" alt="not_found" height="50px" width="70px" style="border: 1px ; border-radius: 3px;">
+            {% endif %}
+        <h1 class="roboto-slab">{{ location | title}} Weather Forecast </h1></div>
+        <div class="row  m-4 p-3 d-flex align-content-center justify-content-center" style="border-radius: 5px;background-color: #f5f5f5; ">
+            {% if weekdays %}
+            {% for weekday in weekdays %}
+           
+                <div class="col text-center ">
+                    <a href="/forecast/{{ forloop.counter0 }}" class="weekday">{{ weekday }}</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Data not available</p>
+        {% endif %}
+        
+        </div>
+        <hr>
+        <div class="container mt-3 ">
+            <h2 class="roboto-slab">{{ day | title }} Weather In {{ location }} , date : {{weather_data.weather_detail.date}} </h2>
+
+            <div class="row mt-4 pb-0" style="border-top: 1px solid black;border-bottom: 1px solid black;">
+               <div class="col-3" style="border-left: 1px solid #E5E4E2;">
+                <p class="m-2"><b>Sunrise: {{weather_data.sunrise}}</b></p>
+                <p class="m-2"><b>Sunset: {{weather_data.sunset}}</b></p>
+               </div >
+               <div class="col-3" style="border-left: 1px solid #E5E4E2;">
+                <p class="m-2"><b>Moonrise: {{weather_data.moonrise}}</b></p>
+                <p class="m-2"><b>Moonset: {{weather_data.moonset}}</b></p>
+               </div>
+               <div class="col" style="border-left: 1px solid #E5E4E2;background-color: #E3963E;">
+                <p class="m-2"><b>Max_Temp:</b></p>
+                <p class="m-2"><b>{{weather_data.max_temp}}<sup>0</sup>C</b></p>
+                
+               </div>
+               <div class="col" style="border-left: 1px solid #E5E4E2;background-color: #FAD5A5;">
+                <p class="m-2"><b>Min_Temp:</b></p>
+                <p class="m-2"><b>{{weather_data.min_temp}}<sup>0</sup>C</b></p>
+                
+               </div>
+               <div class="col" style="border-left: 1px solid #E5E4E2;background-color: #FFC000;">
+                <p class="m-2"><b>Avg_tem:</b></p>
+                <p class="m-2"><b>{{weather_data.avg_temp}}<sup>0</sup>C</b></p>
+               </div>
+               <div class="col" style="border-left: 1px solid #E5E4E2; border-right: 1px solid #E5E4E2;;">
+                <p class="m-2"><b>Precip:</b></p>
+                <p class="m-2"><b>0.00 in</b></p>
+               </div>
+               <div class="col" style="border-left: 1px solid #E5E4E2;background-color: #AFE1AF;">
+                <p class="m-2"><b>Max_Wind</b></p>
+                <p class="m-2"><b>{{weather_data.max_wind}} mph</b></p>
+               </div>
+            </div>
+        </div>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col">
+                    <table class="table table-bordered" >
+                        <thead>
+                            
+                            <tr>
+                                <th></th>
+                                {% for time in weather_data.weather_detail.time%}
+                                <th style="background-color: #36454F;color:white"><p>{{time}}</p></th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody >
+                           <tr class="table-hover">
+                            <td style="background-color: #36454F;color: white;">Weather</td>
+                            {% for icon in weather_data.weather_detail.icon%}
+                            <td><img src="{{icon}}" alt="not_found"></td>
+                        
+                            {% endfor%}
+                           </tr>
+                           <tr style="background-color: #fad6a5;">
+                            <td style="background-color: #36454F;color:white">Temp</td>
+                            {% for temp in weather_data.weather_detail.temp%}
+                            <td>{{temp}} <sup>0</sup>C</td>
+                            {% endfor %}
+                           </tr>
+                           <tr style="background-color: #ed9121;">
+                            <td style="background-color: #36454F;color:white">Feels</td>
+                            {% for feels in weather_data.weather_detail.feels_like%}
+                            <td>{{feels}}<sup>0</sup>C</td>
+                            {%endfor%}
+                           </tr>
+                           <tr style="background-color: #c6fcff;" >
+                            <td style="background-color: #36454F;color:white">Wind</td>
+                            {% for wind in weather_data.weather_detail.wind_mph%}
+                            <td>{{wind}} mph</td>
+                            {%endfor%}
+                           </tr>
+                           <tr>
+                            <td style="background-color: #36454F;color:white">Dir</td>
+                            {% for dir in weather_data.weather_detail.wind_dir%}
+                            <td>{{dir}}</td>
+                            {%endfor%}
+                           </tr>
+                           <tr style="background-color: #c6fcff;">
+                            <td style="background-color: #36454F;color:white">Gust</td>
+                            {% for gust in weather_data.weather_detail.gust%}
+                            <td>{{gust}}mph</td>
+                            {%endfor%}
+                           </tr>
+                           <tr>
+                            <td style="background-color: #36454F;color:white">Pricip</td>
+                            {% for pricip in weather_data.weather_detail.precip%}
+                            <td>{{pricip}} mm</td>
+                            {%endfor%}
+                           </tr>
+                           <tr>
+                            <td style="background-color: #36454F;color:white">Cloud</td>
+                            {% for cloud in weather_data.weather_detail.cloud%}
+                            <td>{{cloud}}% </td>
+                            {%endfor%}
+                           </tr>
+                           <tr>
+                            <td style="background-color: #36454F;color:white">Humidity</td>
+                            {% for humidity in weather_data.weather_detail.humidity%}
+                            <td>{{humidity}}%</td>
+                            {%endfor%}
+                           </tr>
+                           <tr style="background-color: #c6fcff; "> 
+                            <td style="background-color: #36454F;color:white ; ">Pressure</td>
+                            {% for pressure in weather_data.weather_detail.pressure%}
+                            <td>{{pressure}} in</td>
+                            {%endfor%}
+                           </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex align-content-center justify-content-center mt-4" style="background-color: #10898d;">
+        <div class="col p-2 d-flex align-content-center justify-content-center">
+            <p class="text-center pb-0 m-0 text-white roboto-slab" style="font-size: 20px; font-weight:500;">&copy; All Right Resrverd By Edunext School 2024 </p>
+        </div>
+    </div>
+</body>
+</html>

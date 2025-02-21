@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      body{
+        padding:0;
+        margin:0;
+      }
+
+      .roboto-slab {
+               font-family: "Roboto Slab", serif;
+              font-optical-sizing: auto;
+               font-weight: 300;
+               font-style: normal;
+              }
+    </style>
+    {% block link%}
+    {% endblock %}
+</head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<body>
+    <div class="container-fluid m-0">
+      <div class="row " style="box-shadow: 2px 2px 2px 0  rgba(0, 0, 0, 0.2);position: fixed;top: 0;left: 0;right: 0;background-color:#4e9294" >
+        <div class="col">
+          <nav class="navbar p-0">
+            <a class="navbar-brand roboto-slab px-5 text-white" style="font-size: 26px;"><b>Weather App</b>
+            <img src="{%static 'images/logo4.png'%}" alt="" height="80" width="80" class="d-inline-block align-content-center"></a>
+            <div class="navbar-text d-flex gap-5 font-monospace " style="font-size: 22px;margin-right: 50px;">
+              <a href="\weather" class="roboto-slab text-white">Weather</a>
+             <a href="\login" style='text-decoration: none;' class="roboto-slab text-white">login</a>
+             <a href="\logout" style='text-decoration: none;' class="roboto-slab text-white">logout</a>
+             <a href="\signup" style='text-decoration: none;' class="roboto-slab text-white">signup</a>
+            
+            </div>
+          </nav>
+        </div> 
+      </div>
+      {% block body %}
+      {%endblock%}
+      <div class="row d-flex align-content-center justify-content-center" style="background-color: #10898d; position: fixed; bottom: 0; right: 0;left: 0;">
+        <div class="col p-2 d-flex align-content-center justify-content-center">
+            <p class="text-center pb-0 m-0 text-white roboto-slab" style="font-size: 20px; font-weight:500;">Weather App | Made by Hina_Negi | 2024</p>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
