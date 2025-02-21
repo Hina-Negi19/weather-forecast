@@ -19,6 +19,9 @@ def home_view(request):
 def index_view(request):
     return render(request,'weather/index.html')
 
+
+# login view 
+
 def login_view(request):
     if request.method=='POST':
         email=request.POST.get('email')
