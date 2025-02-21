@@ -12,7 +12,7 @@ import datetime
 from smtplib import SMTPRecipientsRefused
 
 
-# Create your views here.
+#home view
 def home_view(request):
     return render(request,'weather/home.html')
 
